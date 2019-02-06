@@ -9,10 +9,10 @@ IntensityImage * StudentPreProcessing::stepScaleImage(const IntensityImage &imag
 	return nullptr;
 }
 
-IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &image) const {
+IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &image) const { // aanpassen
 	return nullptr;
 }
 
-IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &image) const {
+IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &image) const { // aanpassen
 	return nullptr;
 }
