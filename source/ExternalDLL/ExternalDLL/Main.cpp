@@ -19,14 +19,14 @@ int main(int argc, char * argv[]) {
 	//ImageFactory::setImplementation(ImageFactory::STUDENT);
 
 
-	ImageIO::debugFolder = "D:\\Users\\Rolf\\Downloads\\FaceMinMin";
+	ImageIO::debugFolder = "C:/ti-software/HU-Vision-Kaasbroodje/source/ExternalDLL/Debug";
 	ImageIO::isInDebugMode = true; //If set to false the ImageIO class will skip any image save function calls
 
 
 
 
 	RGBImage * input = ImageFactory::newRGBImage();
-	if (!ImageIO::loadImage("D:\\Users\\Rolf\\Downloads\\TestA5.jpg", *input)) {
+	if (!ImageIO::loadImage("C:/ti-software/HU-Vision-Kaasbroodje/source/ExternalDLL/Debug/child1.png", *input)) {
 		std::cout << "Image could not be loaded!" << std::endl;
 		system("pause");
 		return 0;
@@ -74,7 +74,7 @@ bool executeSteps(DLLExecution * executor) {
 	}
 	ImageIO::saveIntensityImage(*executor->resultPreProcessingStep2, ImageIO::getDebugFileName("Pre-processing-2.png"));
 
-	if (!executor->executePreProcessingStep3(false)) {
+	if (!executor->executePreProcessingStep3(true)) {
 		std::cout << "Pre-processing step 3 failed!" << std::endl;
 		return false;
 	}
