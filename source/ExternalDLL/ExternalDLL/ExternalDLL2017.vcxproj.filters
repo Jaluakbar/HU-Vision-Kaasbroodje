@@ -117,6 +117,9 @@
     <ClInclude Include="edge_detection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="thresholding.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Image.cpp">
