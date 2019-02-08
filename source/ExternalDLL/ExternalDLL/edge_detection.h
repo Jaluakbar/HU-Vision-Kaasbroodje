@@ -25,7 +25,7 @@ namespace ed{
 		{
 			for (int y = 0; y < image.getHeight(); y++) {
 				for (int x = 0; x < image.getWidth(); x++) {
-					m[y][x] = image.getPixel(x, y);
+					m[y][x] = image.getPixel(y, x);
 				}
 			}
 		}
@@ -44,7 +44,6 @@ namespace ed{
 			for (int y = 0; y < org_height; y++) {
 				for (int x = 0; x < org_width; x++) {
 					img_ptr->setPixel(x, y, (char)m[x][y]);
-					std::cout << m[x][y];
 				}
 			}
 			return img_ptr;
@@ -80,7 +79,7 @@ namespace ed{
 						int jj = j + (kernel_center_X - nn);
 
 						// ignore input samples which are out of bound
-						if (ii >= 0 && ii < image.height && jj >= 0 && jj < image.width){
+						if (ii > 0 && ii < image.height && jj >= 0 && jj < image.width){
 							new_image[i][j] += image[ii][jj] * kernel[mm][nn];
 						}
 					}
