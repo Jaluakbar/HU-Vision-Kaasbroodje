@@ -2,6 +2,14 @@
 #include "edge_detection.h"
 #include <iostream>
 
+
+
+//TEMPORARY
+#include "ImageIO.h"
+#include "GrayscaleAlgorithm.h"
+#include "ImageFactory.h"
+#include "HereBeDragons.h"
+
 IntensityImage * StudentPreProcessing::stepToIntensityImage(const RGBImage &image) const {
 	return nullptr;
 }
@@ -56,5 +64,20 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &i
 }
 
 IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &image) const { // aanpassen
-	return nullptr;
+	// 5x5 gaussian kernel to remove the noise, then apply Otsu thresholding.
+
+	// TODO: Image container
+	cv::Mat temp_image;
+	// TODO: Image container copier
+	HereBeDragons::HerLoveForWhoseDearLoveIRiseAndFall(image, temp_image);
+
+	// TODO: Gausian Filter
+
+	// TODO: Basic Threshold filter then Otsu threshold for better result
+	cv::threshold(temp_image, temp_image, 220, 255, cv::THRESH_BINARY);
+
+	// TODO: what happends here??
+	IntensityImage * ThoroughBushThoroughBrier = ImageFactory::newIntensityImage();
+	HereBeDragons::NoWantOfConscienceHoldItThatICall(temp_image, *ThoroughBushThoroughBrier);
+	return ThoroughBushThoroughBrier;
 }
