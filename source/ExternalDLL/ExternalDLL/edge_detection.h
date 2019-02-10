@@ -15,7 +15,7 @@ namespace ed{
 		int org_width=-1;
 		int org_height=-1;
 
-		std::array<std::array<int, W>, H> m;
+		std::array<int, W * H> m;
 
 		matrix() = default;
 
@@ -25,7 +25,7 @@ namespace ed{
 		{
 			for (int y = 0; y < image.getHeight(); y++) {
 				for (int x = 0; x < image.getWidth(); x++) {
-					m[y][x] = image.getPixel(y, x);
+					m[(y*W) + x] = image.getPixel(y, x);
 				}
 			}
 		}
@@ -33,7 +33,7 @@ namespace ed{
 		matrix(const std::array<std::array<int, W>, H> & matrix) {
 			for (int y = 0; y < H; y++) {
 				for (int x = 0; x < W; x++) {
-					m[y][x] = matrix[y][x];
+					m[(y*W) + x] = matrix[y][x];
 				}
 			}
 		}
@@ -43,16 +43,17 @@ namespace ed{
 			img_ptr->set(org_width, org_height);
 			for (int y = 0; y < org_height; y++) {
 				for (int x = 0; x < org_width; x++) {
-					img_ptr->setPixel(x, y, (char)m[x][y]);
+					img_ptr->setPixel(x, y, this->operator()(x,y));
 				}
 			}
 			return img_ptr;
 		}
 
-		std::array<int, W> & operator[](const int & i) {
-			return m[i];
+		int & operator()(int y, int x) {
+			return m[(y*width) + x];
 		}
 	};
+
 
 	template <int iH, int iW, int kH, int kW>
 	matrix<iH, iW> convolution(matrix<iH,iW> & image, matrix<kH, kW> & kernel){
@@ -80,7 +81,7 @@ namespace ed{
 
 						// ignore input samples which are out of bound
 						if (ii > 0 && ii < image.height && jj >= 0 && jj < image.width){
-							new_image[i][j] += image[ii][jj] * kernel[mm][nn];
+							new_image(i,j) += image(ii,jj) * kernel(mm,nn);
 						}
 					}
 				}
@@ -90,6 +91,7 @@ namespace ed{
 	}
 
 }
+
 
 
 
