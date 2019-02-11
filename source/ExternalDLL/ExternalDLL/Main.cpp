@@ -26,7 +26,7 @@ int main(int argc, char * argv[]) {
 
 
 	RGBImage * input = ImageFactory::newRGBImage();
-	if (!ImageIO::loadImage("C:\\ti-software\\HU-Vision-Kaasbroodje\\source\\ExternalDLL\\Debug\\male-1.png", *input)) {
+	if (!ImageIO::loadImage("C:\\ti-software\\HU-Vision-Kaasbroodje\\source\\ExternalDLL\\Debug\\child-1.png", *input)) {
 		std::cout << "Image could not be loaded!" << std::endl;
 		system("pause");
 		return 0;
