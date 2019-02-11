@@ -80,7 +80,8 @@ IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &im
 
 	// TODO: Basic Threshold filter then Otsu threshold for better result
 	//cv::threshold(temp_image, temp_image, 127, 200, cv::THRESH_BINARY_INV);
-	tr::basic_threshold(m, 185, 255);
+	//tr::basic_threshold(m, 185, 255);
+	tr::auto_threshold(m, 120, 255);
 
 	// TODO: Make pointer image to return. DONE
 	//IntensityImage * ThoroughBushThoroughBrier = ImageFactory::newIntensityImage();
