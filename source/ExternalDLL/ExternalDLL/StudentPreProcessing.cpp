@@ -11,7 +11,7 @@ IntensityImage * StudentPreProcessing::stepScaleImage(const IntensityImage &imag
 }
 
 IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &image) const { // aanpassen
-	ed::matrix<260,260> m(image);
+	ed::matrix<225,225> m(image);
 	ed::matrix<9, 9> kernel({ {
 	{0,0,0,1,1,1,0,0,0},
 	{0,0,0,1,1,1,0,0,0},
