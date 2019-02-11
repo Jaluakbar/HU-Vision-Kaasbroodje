@@ -11,8 +11,18 @@ IntensityImage * StudentPreProcessing::stepScaleImage(const IntensityImage &imag
 }
 
 IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &image) const { // aanpassen
-	ed::matrix<225,225> m(image);
-	ed::matrix<9, 9> kernel({ {
+	ed::matrix<int> m(image);
+
+	//ed::matrix<double, 5, 5> gaussian_kernel({ {
+	//		{static_cast<double>(0.031827), 	static_cast<double>(0.037541), static_cast<double>(0.039665), static_cast<double>(0.037541), static_cast<double>(0.031827)},
+	//		{static_cast<double>(0.037541), static_cast<double>(0.044281), static_cast<double>(0.046787), static_cast<double>(0.044281), static_cast<double>(0.037541)},
+	//		{static_cast<double>(0.039665), static_cast<double>(0.046787), static_cast<double>(0.049434), static_cast<double>(0.046787), 	static_cast<double>(0.039665)},
+	//		{static_cast<double>(0.037541), static_cast<double>(0.044281), static_cast<double>(0.046787), static_cast<double>(0.044281), 	static_cast<double>(0.037541)},
+	//		{static_cast<double>(0.031827), 	static_cast<double>(0.037541), static_cast<double>(0.039665), static_cast<double>(0.037541), static_cast<double>(0.031827)},
+	//	} });
+	//auto convulutioned = ed::convolution<int, 5, 5, double>(m, gaussian_kernel);
+
+	ed::matrix<int, 9,9> kernel({ {
 	{0,0,0,1,1,1,0,0,0},
 	{0,0,0,1,1,1,0,0,0},
 	{0,0,0,1,1,1,0,0,0},
@@ -25,13 +35,11 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &i
 } });
 
 
-	auto convulutioned = ed::convolution(m, kernel);
+	auto convulutioned = ed::convolution<int, 9, 9>(m, kernel);
 
-	std::cout << convulutioned(0,0) << '\n';
-
-	for (int i = 0; i < convulutioned.org_height; i++) {
-		for (int ii = 0; ii < convulutioned.org_width; ii++) {
-			if(convulutioned(i,ii) <= 185 || convulutioned(i,ii) > 2500){
+	for (int i = 0; i < convulutioned.height; i++) {
+		for (int ii = 0; ii < convulutioned.width; ii++) {
+			if(convulutioned(i,ii) <= 150 || convulutioned(i,ii) > 2500){
 				convulutioned(i,ii) = 0;
 			}else{
 				convulutioned(i,ii) = 255;
