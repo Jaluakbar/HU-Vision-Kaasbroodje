@@ -33,7 +33,7 @@ namespace ed{
 			}
 		}
 
-		template <typename TT = int>
+		template <typename TT = T>
 		matrix(const std::array<std::array<TT, W>, H> & matrix):
 			width(W),
 			height(H)
@@ -57,18 +57,18 @@ namespace ed{
 			return img_ptr;
 		}
 
-		int & operator()(const int y, const int x) {
+		T & operator()(const int y, const int x) {
 			return m[(y*width) + x];
 		}
 
-		int & operator()(int n) {
+		T & operator()(int n) {
 			return m[n];
 		}
 	};
 
 
 	template <typename T, T H, T W, typename TT = T>
-	matrix<T> convolution(const matrix<T> & image, const matrix<TT, H, W> & kernel){
+	matrix<T> convolution( matrix<T> & image, matrix<TT, H, W> & kernel) {
 		// find center position of kernel (half of kernel size)
 		unsigned int kernel_width = kernel.width;
 		unsigned int kernel_height = kernel.height;
