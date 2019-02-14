@@ -19,14 +19,13 @@ int main(int argc, char * argv[]) {
 	//ImageFactory::setImplementation(ImageFactory::STUDENT);
 
 
-	ImageIO::debugFolder = "C:/ti-software/HU-Vision-Kaasbroodje/source/ExternalDLL/Debug";
+	ImageIO::debugFolder = "C:\\ti-software\\HU-Vision-Kaasbroodje\\source\\ExternalDLL\\Debug";
 	ImageIO::isInDebugMode = true; //If set to false the ImageIO class will skip any image save function calls
-
-
 
 
 	RGBImage * input = ImageFactory::newRGBImage();
 	if (!ImageIO::loadImage("C:\\ti-software\\HU-Vision-Kaasbroodje\\source\\ExternalDLL\\Debug\\child-1.png", *input)) {
+
 		std::cout << "Image could not be loaded!" << std::endl;
 		system("pause");
 		return 0;
