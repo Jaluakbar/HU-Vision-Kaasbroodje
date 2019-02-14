@@ -97,7 +97,7 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &i
 
 	for (int i = 0; i < m.height; i++) {
 		for (int ii = 0; ii < m.width; ii++) {
-			if(m(i,ii) <= 152 || m(i,ii) > 2500){
+			if(m(i,ii) <= 155 || m(i,ii) > 2500){
 				m(i,ii) = 0;
 			}else{
 				m(i,ii) = 255;
@@ -128,7 +128,7 @@ IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &im
 	
 	// TODO: Image container. DONE
 	//cv::Mat temp_image;
-	ed::matrix<225,225> m(image);
+	ed::matrix<unsigned char> m(image);
 
 
 	//TODO: 5x5 gaussian kernel to remove the noise, then apply Otsu thresholding.
@@ -143,4 +143,5 @@ IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &im
 	//HereBeDragons::NoWantOfConscienceHoldItThatICall(temp_image, *ThoroughBushThoroughBrier);
 	//return ThoroughBushThoroughBrier;
 	return m.get_intensity_image_ptr();
+	//return nullptr;
 }

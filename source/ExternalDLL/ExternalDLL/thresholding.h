@@ -9,10 +9,10 @@
 
 namespace tr {
 
-	template <int x_src, int y_src>
-	void basic_threshold(ed::matrix<x_src, y_src> &src, int threshold, int maxval) {
-		for (int i = 0; i < x_src; i++) {
-			for (int j = 0; j < y_src; j++) {
+	template <class T>
+	void basic_threshold(ed::matrix<T> &src, int threshold, int maxval) {
+		for (int i = 0; i < src.height; i++) {
+			for (int j = 0; j < src.width; j++) {
 				if (src(i, j) <= threshold || src(i, j) > 2500) {
 					src(i, j) = maxval;
 				}
@@ -23,15 +23,15 @@ namespace tr {
 		}
 	}
 
-	template <int x_src, int y_src>
-	void auto_threshold(ed::matrix<x_src, y_src> &src, int init_threshold, int maxval) {
+	template <class T>
+	void auto_threshold(ed::matrix<T> &src, int init_threshold, int maxval) {
 		int background = 0;
 		int background_pixels = 0;
 		int foreground = 0;
 		int foreground_pixels = 0;
-		for (int i = 0; i < x_src; i++) {
-			for (int j = 0; j < y_src; j++) {
-				if (src(i, j) <= init_threshold /*|| src[i][j] > 2500*/) {
+		for (int i = 0; i < src.height; i++) {
+			for (int j = 0; j < src.width; j++) {
+				if (src(i, j) <= init_threshold) {
 					background += src(i, j);
 					background_pixels += 1;
 				}
