@@ -24,7 +24,8 @@ int main(int argc, char * argv[]) {
 
 
 	RGBImage * input = ImageFactory::newRGBImage();
-	if (!ImageIO::loadImage("C:\\ti-software\\HU-Vision-Kaasbroodje\\source\\ExternalDLL\\Debug\\female-1.png", *input)) {
+	if (!ImageIO::loadImage("C:\\ti-software\\HU-Vision-Kaasbroodje\\source\\ExternalDLL\\Debug\\child-1.png", *input)) {
+
 		std::cout << "Image could not be loaded!" << std::endl;
 		system("pause");
 		return 0;
@@ -78,7 +79,7 @@ bool executeSteps(DLLExecution * executor) {
 	}
 	ImageIO::saveIntensityImage(*executor->resultPreProcessingStep3, ImageIO::getDebugFileName("Pre-processing-3.png"));
 
-	if (!executor->executePreProcessingStep4(false)) {
+	if (!executor->executePreProcessingStep4(true)) {
 		std::cout << "Pre-processing step 4 failed!" << std::endl;
 		return false;
 	}

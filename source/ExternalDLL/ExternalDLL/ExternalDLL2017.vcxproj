@@ -113,6 +113,7 @@
     <ClInclude Include="StudentExtraction.h" />
     <ClInclude Include="StudentLocalization.h" />
     <ClInclude Include="StudentPreProcessing.h" />
+    <ClInclude Include="thresholding.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DefaultExtraction.cpp" />
