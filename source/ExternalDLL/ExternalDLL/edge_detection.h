@@ -3,6 +3,8 @@
 #include "IntensityImage.h"
 #include "ImageFactory.h"
 #include <array>
+#include <iostream>
+#include <map>
 
 namespace ed{
 
@@ -57,12 +59,48 @@ namespace ed{
 			return img_ptr;
 		}
 
+		template <typename NT = unsigned char>
+		void equalization(int spread_size) {
+			//matrix<NT> new_matrix(height, width);
+			static std::map<T, unsigned int> cdf = cdf_map();
+			static std::map<T, NT> equalized_value_map;
+			
+			//auto cdf_min = (cdf.begin()->first == 0) ? (std::next(cdf.begin(), 1)->second) : cdf.begin()->second;
+			auto cdf_min = cdf.begin()->second;
+			auto MxN = width * height;
+			for(auto& pair :cdf){
+				equalized_value_map[pair.first] = ((cdf[pair.first] - cdf_min) / (MxN - cdf_min) * (spread_size - 1));
+				std::cout << equalized_value_map[pair.first] << '\n';
+			}
+		}
+
 		T & operator()(const int y, const int x) {
 			return m[(y*width) + x];
 		}
 
 		T & operator()(int n) {
 			return m[n];
+		}
+
+	protected:
+		
+		std::map<T, unsigned int> cdf_map() {
+			std::map<T, unsigned int> map;
+			for (int i = 0; i < (width*height); i++) {
+				if (m[i] < 0){
+					map[0] += 1;
+				} else {
+					map[m[i]] += 1;
+				}
+			}
+			//std::cout << (std::next(map.end(), 1))->first << " && " << (std::next(map.end(), 1))->second << '\n';
+			//std::cout << map[(std::next(map.end(), 1))->first] << '\n';
+			for (auto ptr = std::next(map.begin(), 1); ptr != map.end(); ptr++) {
+				ptr->second += (std::next(ptr, -1))->second;
+			}
+			//std::cout << (std::next(map.end(), 1))->first << " && " << (std::next(map.end(), 1))->second << '\n';
+			//std::cout << map[(std::next(map.end(), 1))->first] << '\n';
+			return map;
 		}
 	};
 
@@ -97,5 +135,6 @@ namespace ed{
 		}
 		return new_image;
 	}
+
 
 }

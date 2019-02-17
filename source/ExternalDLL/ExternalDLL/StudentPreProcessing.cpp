@@ -95,6 +95,9 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &i
 	//auto convulutioned = ed::convolution<unsigned char, 5, 5, double>(m, gaussian_kernel);
 	//convulutioned = ed::convolution<unsigned char, 3, 3>(convulutioned, sobel_edge);
 
+
+	m.equalization(256);
+
 	for (int i = 0; i < m.height; i++) {
 		for (int ii = 0; ii < m.width; ii++) {
 			if(m(i,ii) <= 155 || m(i,ii) > 2500){
