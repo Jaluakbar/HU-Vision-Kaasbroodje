@@ -128,15 +128,16 @@ IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &im
 	
 	// TODO: Image container. DONE
 	//cv::Mat temp_image;
-	ed::matrix<unsigned char> m(image);
+	ed::matrix<int> m(image);
 
 
 	//TODO: 5x5 gaussian kernel to remove the noise, then apply Otsu thresholding.
 
+
 	// TODO: Basic Threshold filter then Otsu threshold for better result
 	//cv::threshold(temp_image, temp_image, 127, 200, cv::THRESH_BINARY_INV);
 	//tr::basic_threshold(m, 185, 255);
-	tr::auto_threshold(m, 120, 255);
+	tr::histogram_threshold(m, 255);
 
 	// TODO: Make pointer image to return. DONE
 	//IntensityImage * ThoroughBushThoroughBrier = ImageFactory::newIntensityImage();
