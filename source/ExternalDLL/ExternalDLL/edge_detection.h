@@ -8,7 +8,7 @@
 
 namespace ed{
 
-	template <class T, int H = 0, int W = 0>
+	template <class T, int Height = 0, int Width = 0>
 	class matrix {
 	public:
 		int width = -1;
@@ -36,9 +36,9 @@ namespace ed{
 		}
 
 		template <typename TT = T>
-		matrix(const std::array<std::array<TT, W>, H> & matrix):
-			width(W),
-			height(H)
+		matrix(const std::array<std::array<TT, Width>, Height> & matrix):
+			width(Width),
+			height(Height)
 		{
 			m = new T[height*width];
 			for (int y = 0; y < height; y++) {
@@ -59,18 +59,30 @@ namespace ed{
 			return img_ptr;
 		}
 
-		template <typename NT = unsigned char>
+		template <typename NT = unsigned int>
 		void equalization(int spread_size) {
 			//matrix<NT> new_matrix(height, width);
-			static std::map<T, unsigned int> cdf = cdf_map();
-			static std::map<T, NT> equalized_value_map;
+			static std::map<unsigned int, unsigned int> cdf = cdf_map();
+			static std::map<unsigned int, NT> equalized_value_map;
 			
 			//auto cdf_min = (cdf.begin()->first == 0) ? (std::next(cdf.begin(), 1)->second) : cdf.begin()->second;
 			auto cdf_min = cdf.begin()->second;
+
+			std::cout << "cdf_min = " << cdf_min << '\n';
+			std::cout << "cdf_max = " << std::next(cdf.end(), -1)->second << '\n';
+
 			auto MxN = width * height;
 			for(auto& pair :cdf){
-				equalized_value_map[pair.first] = ((cdf[pair.first] - cdf_min) / (MxN - cdf_min) * (spread_size - 1));
-				std::cout << equalized_value_map[pair.first] << '\n';
+				std::cout << "first = " << pair.first << ", second = " << pair.second << '\n';
+				equalized_value_map[pair.first] = (((pair.second - cdf_min) / (MxN - cdf_min)) * (spread_size - 1));
+				//for (uint_fast8_t i = 0; i < 8; i++ ) {
+				//	std::cout << static_cast<int>((equalized_value_map[pair.first] >> i) & 0b1);
+				//}
+				//std::cout << '\n';
+
+				//std::cout << "first : " << equalized_value_map[pair.first] << " second: " << equalized_value_map[pair.second] << '\n';
+
+				//std::cout << equalized_value_map[pair.first] << '\n';
 			}
 		}
 
@@ -84,8 +96,8 @@ namespace ed{
 
 	protected:
 		
-		std::map<T, unsigned int> cdf_map() {
-			std::map<T, unsigned int> map;
+		std::map<unsigned int, unsigned int> cdf_map() {
+			std::map<unsigned int, unsigned int> map;
 			for (int i = 0; i < (width*height); i++) {
 				if (m[i] < 0){
 					map[0] += 1;
@@ -105,8 +117,8 @@ namespace ed{
 	};
 
 
-	template <typename T, T H, T W, typename TT = T>
-	matrix<T> convolution( matrix<T> & image, matrix<TT, H, W> & kernel) {
+	template <typename T, T Height, T Width, typename TT = T>
+	matrix<T> convolution( matrix<T> & image, matrix<TT, Height, Width> & kernel) {
 		// find center position of kernel (half of kernel size)
 		unsigned int kernel_width = kernel.width;
 		unsigned int kernel_height = kernel.height;
