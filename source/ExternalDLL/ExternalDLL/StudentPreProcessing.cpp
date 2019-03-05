@@ -97,6 +97,15 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &i
 
 	m.equalization(256);
 
+	for(int i = 0; i < m.height; i++){
+		for(int ii = 0; ii < m.width; ii++){
+			//std::cout << "(" << i << ',' << ii << ")  =  " << m(i, ii) << '\n';
+			std::cout << m(i,ii);
+		}
+		std::cout << '\n';
+	}
+
+
 	//for (int i = 0; i < m.height; i++) {
 	//	for (int ii = 0; ii < m.width; ii++) {
 	//		if(m(i,ii) <= 155 || m(i,ii) > 2500){

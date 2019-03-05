@@ -61,57 +61,63 @@ namespace ed{
 
 		template <typename NT = unsigned int>
 		void equalization(int spread_size) {
-			//matrix<NT> new_matrix(height, width);
-			static std::map<unsigned int, unsigned int> cdf = cdf_map();
+			static std::map<int, unsigned int> cdf = cdf_map();
+			// an equalized value map is an map with the old value as key and the new value as value in a map
 			static std::map<unsigned int, NT> equalized_value_map;
-			
-			//auto cdf_min = (cdf.begin()->first == 0) ? (std::next(cdf.begin(), 1)->second) : cdf.begin()->second;
-			auto cdf_min = cdf.begin()->second;
 
-			std::cout << "cdf_min = " << cdf_min << '\n';
-			std::cout << "cdf_max = " << std::next(cdf.end(), -1)->second << '\n';
+			// we need the lowest non-neg cdf value to calibrate every value between 0 and spread_size
+			int lowest_non_neg_cdf_value;
+			std::map<int, unsigned int>::iterator it;
+			for(int i = 0; i < cdf.end()->first; i++){
+				if(cdf[i]){
+					it = cdf.find(i);
+					lowest_non_neg_cdf_value = cdf[i];
+					break;
+				}
+			}
 
-			auto MxN = width * height;
-			for(auto& pair :cdf){
-				std::cout << "first = " << pair.first << ", second = " << pair.second << '\n';
-				equalized_value_map[pair.first] = (((pair.second - cdf_min) / (MxN - cdf_min)) * (spread_size - 1));
-				//for (uint_fast8_t i = 0; i < 8; i++ ) {
-				//	std::cout << static_cast<int>((equalized_value_map[pair.first] >> i) & 0b1);
-				//}
-				//std::cout << '\n';
+			double MxN = width * height;
+			double alpha = spread_size / (MxN - lowest_non_neg_cdf_value);
 
-				//std::cout << "first : " << equalized_value_map[pair.first] << " second: " << equalized_value_map[pair.second] << '\n';
+			// calculate the new equalized values of the pixels.
+			equalized_value_map[0] = static_cast<unsigned int>(alpha * (it->second - lowest_non_neg_cdf_value));
+			std::cout << 0 << " = " << equalized_value_map[0] << '\n';
+			for (int i = 1; i < spread_size; i++) {
+				equalized_value_map[i] = static_cast<unsigned int>(equalized_value_map[i - 1] + (alpha * (it->second - lowest_non_neg_cdf_value)));
+				it = std::next(it, 1);
+			}
 
-				//std::cout << equalized_value_map[pair.first] << '\n';
+			// give the picture the new equalized values of the pixels.
+			for (int i = 0; i < MxN; i++) {
+				m[i] = equalized_value_map[m[i]];
 			}
 		}
 
+		// Operator for using the 1D array as an 2D array
 		T & operator()(const int y, const int x) {
 			return m[(y*width) + x];
 		}
 
+		// Operator for using the 1D array with a direct index)
 		T & operator()(int n) {
 			return m[n];
 		}
 
 	protected:
-		
-		std::map<unsigned int, unsigned int> cdf_map() {
-			std::map<unsigned int, unsigned int> map;
+
+		std::map<int, unsigned int> cdf_map() {
+			std::map<int, unsigned int> map;
 			for (int i = 0; i < (width*height); i++) {
 				if (m[i] < 0){
 					map[0] += 1;
 				} else {
-					map[m[i]] += 1;
+				map[m[i]] += 1;
 				}
 			}
-			//std::cout << (std::next(map.end(), 1))->first << " && " << (std::next(map.end(), 1))->second << '\n';
-			//std::cout << map[(std::next(map.end(), 1))->first] << '\n';
+
 			for (auto ptr = std::next(map.begin(), 1); ptr != map.end(); ptr++) {
 				ptr->second += (std::next(ptr, -1))->second;
 			}
-			//std::cout << (std::next(map.end(), 1))->first << " && " << (std::next(map.end(), 1))->second << '\n';
-			//std::cout << map[(std::next(map.end(), 1))->first] << '\n';
 			return map;
 		}
 	};
@@ -147,6 +153,4 @@ namespace ed{
 		}
 		return new_image;
 	}
-
-
 }
