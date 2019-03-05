@@ -130,10 +130,6 @@ IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &im
 	//cv::Mat temp_image;
 	ed::matrix<int> m(image);
 
-
-	//TODO: 5x5 gaussian kernel to remove the noise, then apply Otsu thresholding.
-
-
 	// TODO: Basic Threshold filter then Otsu threshold for better result
 	//cv::threshold(temp_image, temp_image, 127, 200, cv::THRESH_BINARY_INV);
 	//tr::basic_threshold(m, 185, 255);
