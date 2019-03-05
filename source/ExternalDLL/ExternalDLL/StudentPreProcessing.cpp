@@ -95,15 +95,26 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &i
 	//auto convulutioned = ed::convolution<unsigned char, 5, 5, double>(m, gaussian_kernel);
 	//convulutioned = ed::convolution<unsigned char, 3, 3>(convulutioned, sobel_edge);
 
-	for (int i = 0; i < m.height; i++) {
-		for (int ii = 0; ii < m.width; ii++) {
-			if(m(i,ii) <= 155 || m(i,ii) > 2500){
-				m(i,ii) = 0;
-			}else{
-				m(i,ii) = 255;
-			}
+	m.equalization(256);
+
+	for(int i = 0; i < m.height; i++){
+		for(int ii = 0; ii < m.width; ii++){
+			//std::cout << "(" << i << ',' << ii << ")  =  " << m(i, ii) << '\n';
+			std::cout << m(i,ii);
 		}
+		std::cout << '\n';
 	}
+
+
+	//for (int i = 0; i < m.height; i++) {
+	//	for (int ii = 0; ii < m.width; ii++) {
+	//		if(m(i,ii) <= 155 || m(i,ii) > 2500){
+	//			m(i,ii) = 0;
+	//		}else{
+	//			m(i,ii) = 255;
+	//		}
+	//	}
+	//}
 
 
 	//m = ed::convolution<int, 3, 3>(m, dilation);
