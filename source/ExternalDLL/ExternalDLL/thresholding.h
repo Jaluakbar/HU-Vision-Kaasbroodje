@@ -54,33 +54,33 @@ namespace tr {
 		}
 	}
 
-		template <class T>
-		void histogram_threshold(ed::matrix<T> &src, int maxval) {
-			std::array<int, 256> histogram{};
+	template <class T>
+	void histogram_threshold(ed::matrix<T> &src, int maxval) {
+		std::array<int, 256> histogram{};
 
-			for (int i = 0; i < src.height; i++) {
-				for (int j = 0; j < src.width; j++) {
-					//std::cout << "TST : " << i << ',' << j << " : " << src(i, j) << "\n"; 
-					histogram[src(i, j)] += 1;
-				}
+		for (int i = 0; i < src.height; i++) {
+			for (int j = 0; j < src.width; j++) {
+				//std::cout << "TST : " << i << ',' << j << " : " << src(i, j) << "\n"; 
+				histogram[src(i, j)] += 1;
 			}
-
-			int t = 0;
-			for(auto h : histogram)
-			{	
-				std::cout << t << " : " << h << '\n';
-				t++;
-			}
-			//Need peak location not value
-			auto middle = histogram.begin();
-			std::advance(middle, 127);
-			auto white_peak = std::max_element(histogram.begin(), middle);
-			auto black_peak = std::max_element(middle, histogram.end());
-			
-			int threshold = (std::distance(histogram.begin(), white_peak) + std::distance(histogram.begin(), black_peak)) / 2;
-			std::cout << threshold;
-			basic_threshold(src, threshold, maxval);
 		}
+
+		int t = 0;
+		for (auto h : histogram)
+		{
+			std::cout << t << " : " << h << '\n';
+			t++;
+		}
+		//Need peak location not value
+		auto middle = histogram.begin();
+		std::advance(middle, 127);
+		auto white_peak = std::max_element(histogram.begin(), middle);
+		auto black_peak = std::max_element(middle, histogram.end());
+
+		int threshold = (std::distance(histogram.begin(), white_peak) + std::distance(histogram.begin(), black_peak)) / 2;
+		std::cout << threshold;
+		basic_threshold(src, threshold, maxval);
+	}
 
 
 }
