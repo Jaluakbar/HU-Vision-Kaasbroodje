@@ -1,14 +1,7 @@
 #include "StudentPreProcessing.h"
 #include "edge_detection.h"
-#include <iostream>
-#include "thresholding.h"
-
-
-//TEMPORARY
 #include "ImageIO.h"
-#include "GrayscaleAlgorithm.h"
 #include "ImageFactory.h"
-#include "HereBeDragons.h"
 
 IntensityImage * StudentPreProcessing::stepToIntensityImage(const RGBImage &image) const {
 	return nullptr;
@@ -20,19 +13,7 @@ IntensityImage * StudentPreProcessing::stepScaleImage(const IntensityImage &imag
 
 IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &image) const { // aanpassen
 
-
-
-
-
-
-	ed::matrix<double, 5, 5> gaussian_kernel({ {
-		{0.015026,0.015026,0.035391,0.028569,0.015026},
-		{ 0.028569,0.054318,0.067288,0.054318,0.028569},
-		{0.035391,0.067288,0.083355,0.067288,0.035391},
-		{0.028569,0.054318,0.067288,0.054318,0.028569},
-		{0.015026,0.015026,0.035391,0.028569,0.015026}}
-	});
-
+	// Canny edge detection.
 	ed::matrix<int, 9,9> edge_kernel({ {
 	{0,0,0,1,1,1,0,0,0},
 	{0,0,0,1,1,1,0,0,0},
@@ -45,111 +26,38 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &i
 	{0,0,0,1,1,1,0,0,0}
 } });
 
-//	ed::matrix<int, 3, 3> edge_kernel({ {
-//		{0,1,0},
-//		{1,-4,1},
-//		{0,1,0}
-//} });
+	// Create an ed::matrix from the IntensityImage
+	ed::matrix<int> img(image);
 
-	ed::matrix<unsigned char, 3, 3> dilation({{
-		{0,1,0},
-		{1,1,1},
-		{0,1,0}
-		} });
+	// Use the Canny edge detection kernel to complete the first step in the edge detection.
+	img = ed::convolution<int>(img, edge_kernel);
 
-	ed::matrix<unsigned char, 9, 9> dilation_great({ {
-		{0,0,0,1,1,1,0,0,0},
-		{0,0,0,1,1,1,0,0,0},
-		{0,0,0,1,1,1,0,0,0},
-		{1,1,1,1,1,1,1,1,1},
-		{1,1,1,1,1,1,1,1,1},
-		{1,1,1,1,1,1,1,1,1},
-		{0,0,0,1,1,1,0,0,0},
-		{0,0,0,1,1,1,0,0,0},
-		{0,0,0,1,1,1,0,0,0},
-		} });
+	// The equalization function can be used to shrink or expand the values whitin the given range.
+	//img.equalization(255);
 
+	// Use the Canny edge detection thresholding to complete step 2 and also the last step in the edge detection.
+	img.thresholding_static();
 
-	ed::matrix<unsigned char,3 , 3> sobel_edge({{
-		{1,2,2},
-		{1,1,0},
-		{2,4,1}
-	} });
-
-	ed::matrix<int, 5, 5> lap_from_gaus({ {
-		{0,0,-1,0,0},
-		{0,-1,-2,-1,0},
-		{-1,-2,16, -2, -1},
-		{0,-1,-2,-1,0},
-		{0,0,-1,0,0}
-} });
-
-	ed::matrix<int> m(image);
-
-	//auto convulutioned = ed::convolution<unsigned char, 5, 5, double>(m, gaussian_kernel);
-	//convulutioned = ed::convolution<unsigned char, 5, 5, int>(convulutioned, lap_from_gaus);
-
-	m = ed::convolution<int, 9,9>(m, edge_kernel);
-	//m = ed::convolution<int, 3, 3>(m, dilation);
-
-	//auto convulutioned = ed::convolution<unsigned char, 5, 5, double>(m, gaussian_kernel);
-	//convulutioned = ed::convolution<unsigned char, 3, 3>(convulutioned, sobel_edge);
-
-	m.equalization(256);
-
-	for(int i = 0; i < m.height; i++){
-		for(int ii = 0; ii < m.width; ii++){
-			//std::cout << "(" << i << ',' << ii << ")  =  " << m(i, ii) << '\n';
-			std::cout << m(i,ii);
-		}
-		std::cout << '\n';
-	}
-
-
-	//for (int i = 0; i < m.height; i++) {
-	//	for (int ii = 0; ii < m.width; ii++) {
-	//		if(m(i,ii) <= 155 || m(i,ii) > 2500){
-	//			m(i,ii) = 0;
-	//		}else{
-	//			m(i,ii) = 255;
-	//		}
-	//	}
-	//}
-
-
-	//m = ed::convolution<int, 3, 3>(m, dilation);
-
-	//for(int i = 0; i < m.height; i++){
-	//	for (int ii = 0; ii < m.width; ii++) {
-	//		if(m(i,ii) >= 155 && m(i,ii) <= 2500){
-	//			m(i, ii) = 255;
-	//		}else{
-	//			m(i, ii) = 0;
-	//		}
-	//	}
-	//}
-
-
-	//m = ed::convolution<unsigned char, 9, 9>(m, dilation_great);
-
-	return m.get_intensity_image_ptr();
+	// convert the matrix to a IntensityImage type which is required.
+	return img.get_intensity_image_ptr();
 }
 
+/**
+ *\brief We don't use this function.
+ *
+ * We don't use this function becouse we do the thresholding in the edge detection function.
+ * Read the documentation for more information.
+ */
 IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &image) const { // aanpassen
-	
-	// TODO: Image container. DONE
-	//cv::Mat temp_image;
-	ed::matrix<int> m(image);
-
-	// TODO: Basic Threshold filter then Otsu threshold for better result
-	//cv::threshold(temp_image, temp_image, 127, 200, cv::THRESH_BINARY_INV);
-	tr::basic_threshold(m, 6, 255);
-	//tr::histogram_threshold(m, 255);
-
-	// TODO: Make pointer image to return. DONE
-	//IntensityImage * ThoroughBushThoroughBrier = ImageFactory::newIntensityImage();
-	//HereBeDragons::NoWantOfConscienceHoldItThatICall(temp_image, *ThoroughBushThoroughBrier);
-	//return ThoroughBushThoroughBrier;
-	return m.get_intensity_image_ptr();
-	//return nullptr;
+	// The next lines of code are required to create a copy of the given IntensityImage parameter and return it.
+	// We couldn't just make a pointer of the IntensityImage reference becouse it's a const parameter which is declared in the abstract
+	// class so we couldn't change const to non-const.
+	IntensityImage * img_ptr = ImageFactory::newIntensityImage();
+	img_ptr->set(image.getWidth(), image.getHeight());
+	for (int y = 0; y < image.getHeight(); y++) {
+		for (int x = 0; x < image.getWidth(); x++) {
+			img_ptr->setPixel(x, y, image.getPixel(x,y));
+		}
+	}
+	return img_ptr;
 }

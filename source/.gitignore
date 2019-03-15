@@ -3,13 +3,10 @@
 *.exe
 *.user
 
-
-
 ExternalDLL/ExternalDLL/OpenCV/staticlib_x86_vc12/OpenCVConfig.cmake
 ExternalDLL/ExternalDLL/OpenCV/staticlib_x86_vc12/OpenCVModules.cmake
 ExternalDLL/ExternalDLL/OpenCV/staticlib_x86_vc12/OpenCVModules-debug.cmake
 ExternalDLL/ExternalDLL/OpenCV/staticlib_x86_vc12/OpenCVModules-release.cmake
-
 
 ExternalDLL/ExternalDLL/Debug/
 FaceRecognitionGUI/FaceRecognitionGUI/bin/
@@ -20,3 +17,5 @@ ExternalDLL/Debug/
 *.opensdf
 ExternalDLL/ExternalDLL/Release/
 ExternalDLL/Release/
+
+ExternalDLL/Doxygen/
