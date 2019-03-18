@@ -1,5 +1,6 @@
 #include "StudentPreProcessing.h"
 #include "edge_detection.h"
+#include "thresholding.h"
 #include "ImageIO.h"
 #include "ImageFactory.h"
 
@@ -11,8 +12,7 @@ IntensityImage * StudentPreProcessing::stepScaleImage(const IntensityImage &imag
 	return nullptr;
 }
 
-IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &image) const { // aanpassen
-
+IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &image) const { 
 	// Canny edge detection.
 	ed::matrix<int, 9,9> edge_kernel({ {
 	{0,0,0,1,1,1,0,0,0},
@@ -36,7 +36,8 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &i
 	//img.equalization(255);
 
 	// Use the Canny edge detection thresholding to complete step 2 and also the last step in the edge detection.
-	img.thresholding_static();
+	tr::basic_threshold<int>(img, 155);
+
 
 	// convert the matrix to a IntensityImage type which is required.
 	return img.get_intensity_image_ptr();
@@ -48,7 +49,7 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &i
  * We don't use this function becouse we do the thresholding in the edge detection function.
  * Read the documentation for more information.
  */
-IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &image) const { // aanpassen
+IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &image) const { 
 	// The next lines of code are required to create a copy of the given IntensityImage parameter and return it.
 	// We couldn't just make a pointer of the IntensityImage reference becouse it's a const parameter which is declared in the abstract
 	// class so we couldn't change const to non-const.
