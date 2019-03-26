@@ -38,7 +38,6 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &i
 	// Use the Canny edge detection thresholding to complete step 2 and also the last step in the edge detection.
 	tr::basic_threshold<int>(img, 155);
 
-
 	// convert the matrix to a IntensityImage type which is required.
 	return img.get_intensity_image_ptr();
 }
