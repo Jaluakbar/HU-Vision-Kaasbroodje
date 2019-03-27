@@ -75,12 +75,6 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &i
 	return img.get_intensity_image_ptr();
 }
 
-/**
- *\brief We don't use this function.
- *
- * We don't use this function becouse we do the thresholding in the edge detection function.
- * Read the documentation for more information.
- */
 IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &image) const { 
 	// The next lines of code are required to create a copy of the given IntensityImage parameter and return it.
 	// We couldn't just make a pointer of the IntensityImage reference becouse it's a const parameter which is declared in the abstract

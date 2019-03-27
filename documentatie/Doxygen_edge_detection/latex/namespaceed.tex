@@ -1,0 +1,44 @@
+\hypertarget{namespaceed}{}\section{ed Namespace Reference}
+\label{namespaceed}\index{ed@{ed}}
+
+
+This namespace contains every function related to the used Canny edge detection.  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classed_1_1matrix}{matrix}}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T , int Height, int Width, typename TT  = T$>$ }\\\mbox{\hyperlink{classed_1_1matrix}{matrix}}$<$ T $>$ \mbox{\hyperlink{namespaceed_aebe10857e20c7b3f680ce43f411d9492}{convolution}} (\mbox{\hyperlink{classed_1_1matrix}{matrix}}$<$ T $>$ \&image, const \mbox{\hyperlink{classed_1_1matrix}{matrix}}$<$ TT, Height, Width $>$ \&kernel)
+\begin{DoxyCompactList}\small\item\em This function convolutes a matrix with another matrix. This function multiplies the first parameter matrix(image) with the second parameter matrix(kernel). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This namespace contains every function related to the used Canny edge detection. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespaceed_aebe10857e20c7b3f680ce43f411d9492}\label{namespaceed_aebe10857e20c7b3f680ce43f411d9492}} 
+\index{ed@{ed}!convolution@{convolution}}
+\index{convolution@{convolution}!ed@{ed}}
+\subsubsection{\texorpdfstring{convolution()}{convolution()}}
+{\footnotesize\ttfamily template$<$typename T , int Height, int Width, typename TT  = T$>$ \\
+\mbox{\hyperlink{classed_1_1matrix}{matrix}}$<$T$>$ ed\+::convolution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classed_1_1matrix}{matrix}}$<$ T $>$ \&}]{image,  }\item[{const \mbox{\hyperlink{classed_1_1matrix}{matrix}}$<$ TT, Height, Width $>$ \&}]{kernel }\end{DoxyParamCaption})}
+
+
+
+This function convolutes a matrix with another matrix. This function multiplies the first parameter matrix(image) with the second parameter matrix(kernel). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & Is the matrix which is going to be convoluted by the second matrix (kernel). \\
+\hline
+{\em kernel} & Is the matrix which is the kernel which the image is going to be multiplied with.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new matrix as result from the convoluted picture with the kernel. 
+\end{DoxyReturn}

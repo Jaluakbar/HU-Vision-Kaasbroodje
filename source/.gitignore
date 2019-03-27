@@ -1,3 +1,18 @@
+*.ide
+*.lock
+source/FaceRecognitionGUI/.vs/FaceRecognitionGUI2015/v15/.suo
+*.ide-wal
+*.ide-shm
+source/FaceRecognitionGUI/.vs/FaceRecognitionGUI/v15/.suo
+*.vcxproj
+*.ipch
+*.opendb
+*.db
+source/ExternalDLL/.vs/ExternalDLL2017/v15/.suo
+*.vcxproj
+*.vcxproj
+*.vcxproj
+*.vscode
 *.sdf
 *.pdf
 *.exe
@@ -18,4 +33,3 @@ ExternalDLL/Debug/
 ExternalDLL/ExternalDLL/Release/
 ExternalDLL/Release/
 
-ExternalDLL/Doxygen/

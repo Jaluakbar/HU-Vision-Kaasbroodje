@@ -1,0 +1,215 @@
+\hypertarget{classed_1_1matrix}{}\section{ed\+:\+:matrix$<$ T, Height, Width $>$ Class Template Reference}
+\label{classed_1_1matrix}\index{ed\+::matrix$<$ T, Height, Width $>$@{ed\+::matrix$<$ T, Height, Width $>$}}
+
+
+{\ttfamily \#include $<$edge\+\_\+detection.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+constexpr \mbox{\hyperlink{classed_1_1matrix_a41874c674fa70fc0d6e6f3cce1825cfe}{matrix}} (const int height, const int width)
+\item 
+\mbox{\hyperlink{classed_1_1matrix_ac61570a638973eb5377cbca411ab9492}{matrix}} (const Intensity\+Image \&image)
+\item 
+{\footnotesize template$<$typename TT  = T$>$ }\\\mbox{\hyperlink{classed_1_1matrix_a96f0856011866bbcf92521bbf5ef9dd3}{matrix}} (const std\+::array$<$ std\+::array$<$ TT, Width $>$, Height $>$ \&\mbox{\hyperlink{classed_1_1matrix}{matrix}})
+\item 
+Intensity\+Image $\ast$ \mbox{\hyperlink{classed_1_1matrix_a2adb72ad2c0829cf6efc33d6984308e6}{get\+\_\+intensity\+\_\+image\+\_\+ptr}} ()
+\begin{DoxyCompactList}\small\item\em This function creates and returns an new Intensity\+Image pointer. This function creates a Intensity\+Image pointer from the matrix and returns the pointer afterwards. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename NT  = unsigned int$>$ }\\void \mbox{\hyperlink{classed_1_1matrix_a49e7d0658023caeafc6cf25385b74872}{equalization}} (int spread\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Non-\/lineair equalization. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classed_1_1matrix_a9188ac4fe9ddc17b80e9b7865f3efe12}\label{classed_1_1matrix_a9188ac4fe9ddc17b80e9b7865f3efe12}} 
+{\footnotesize template$<$unsigned Min\+Value = 0, unsigned Max\+Value = 255$>$ }\\void \mbox{\hyperlink{classed_1_1matrix_a9188ac4fe9ddc17b80e9b7865f3efe12}{thresholding\+\_\+static}} ()
+\begin{DoxyCompactList}\small\item\em Thresholding for Canny edge detection This function is a static implementation of a thresholding function which means that the values that are going to be Min\+Value and Max\+Value are allready known. \end{DoxyCompactList}\item 
+T \& \mbox{\hyperlink{classed_1_1matrix_a958041dd0f380db0f0b60f85b736b020}{operator()}} (const int y, const int x)
+\item 
+T \mbox{\hyperlink{classed_1_1matrix_a6c184e083e3849cb0804915300d68cad}{operator()}} (const int y, const int x) const
+\item 
+T \& \mbox{\hyperlink{classed_1_1matrix_aee4710cd7dd60dc960087bc3466d2881}{operator()}} (int n)
+\item 
+T \mbox{\hyperlink{classed_1_1matrix_ac3928d0287a81060742db500412e530e}{operator()}} (int n) const
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classed_1_1matrix_a57e56f840d1afa119dadee00c909b126}\label{classed_1_1matrix_a57e56f840d1afa119dadee00c909b126}} 
+int {\bfseries width} = -\/1
+\item 
+\mbox{\Hypertarget{classed_1_1matrix_ac5c960e6811fc4f17a465e31dc216c49}\label{classed_1_1matrix_ac5c960e6811fc4f17a465e31dc216c49}} 
+int {\bfseries height} = -\/1
+\item 
+\mbox{\Hypertarget{classed_1_1matrix_ad97cb578ebad45bf4fc7925379a3fa9f}\label{classed_1_1matrix_ad97cb578ebad45bf4fc7925379a3fa9f}} 
+T $\ast$ {\bfseries m}
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classed_1_1matrix_a1f388c37205e6d5443b074719cedd7d9}\label{classed_1_1matrix_a1f388c37205e6d5443b074719cedd7d9}} 
+std\+::map$<$ int, unsigned int $>$ {\bfseries cdf\+\_\+map} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class T, int Height = 0, int Width = 0$>$\newline
+class ed\+::matrix$<$ T, Height, Width $>$}
+
+The matrix class can be used for 2D matrixes. The matrix contains some functions that are handy for working with the H\+U-\/\+Vision code structure. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classed_1_1matrix_a41874c674fa70fc0d6e6f3cce1825cfe}\label{classed_1_1matrix_a41874c674fa70fc0d6e6f3cce1825cfe}} 
+\index{ed\+::matrix@{ed\+::matrix}!matrix@{matrix}}
+\index{matrix@{matrix}!ed\+::matrix@{ed\+::matrix}}
+\subsubsection{\texorpdfstring{matrix()}{matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class T, int Height = 0, int Width = 0$>$ \\
+constexpr \mbox{\hyperlink{classed_1_1matrix}{ed\+::matrix}}$<$ T, Height, Width $>$\+::\mbox{\hyperlink{classed_1_1matrix}{matrix}} (\begin{DoxyParamCaption}\item[{const int}]{height,  }\item[{const int}]{width }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+The constructor for creating an empty matrix by giving the height and width.
+
+
+\begin{DoxyParams}{Parameters}
+{\em height} & The height of the matrix \\
+\hline
+{\em width} & The width of the matrix \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classed_1_1matrix_ac61570a638973eb5377cbca411ab9492}\label{classed_1_1matrix_ac61570a638973eb5377cbca411ab9492}} 
+\index{ed\+::matrix@{ed\+::matrix}!matrix@{matrix}}
+\index{matrix@{matrix}!ed\+::matrix@{ed\+::matrix}}
+\subsubsection{\texorpdfstring{matrix()}{matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class T, int Height = 0, int Width = 0$>$ \\
+\mbox{\hyperlink{classed_1_1matrix}{ed\+::matrix}}$<$ T, Height, Width $>$\+::\mbox{\hyperlink{classed_1_1matrix}{matrix}} (\begin{DoxyParamCaption}\item[{const Intensity\+Image \&}]{image }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+The constructor for creating a matrix from an Intensity\+Image.
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & An Intensity\+Image \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classed_1_1matrix_a96f0856011866bbcf92521bbf5ef9dd3}\label{classed_1_1matrix_a96f0856011866bbcf92521bbf5ef9dd3}} 
+\index{ed\+::matrix@{ed\+::matrix}!matrix@{matrix}}
+\index{matrix@{matrix}!ed\+::matrix@{ed\+::matrix}}
+\subsubsection{\texorpdfstring{matrix()}{matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class T, int Height = 0, int Width = 0$>$ \\
+template$<$typename TT  = T$>$ \\
+\mbox{\hyperlink{classed_1_1matrix}{ed\+::matrix}}$<$ T, Height, Width $>$\+::\mbox{\hyperlink{classed_1_1matrix}{matrix}} (\begin{DoxyParamCaption}\item[{const std\+::array$<$ std\+::array$<$ TT, Width $>$, Height $>$ \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+The constructor for creating a copy of another matrix.
+
+
+\begin{DoxyParams}{Parameters}
+{\em matrix} & The matrix which going to be copied. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classed_1_1matrix_a49e7d0658023caeafc6cf25385b74872}\label{classed_1_1matrix_a49e7d0658023caeafc6cf25385b74872}} 
+\index{ed\+::matrix@{ed\+::matrix}!equalization@{equalization}}
+\index{equalization@{equalization}!ed\+::matrix@{ed\+::matrix}}
+\subsubsection{\texorpdfstring{equalization()}{equalization()}}
+{\footnotesize\ttfamily template$<$class T, int Height = 0, int Width = 0$>$ \\
+template$<$typename NT  = unsigned int$>$ \\
+void \mbox{\hyperlink{classed_1_1matrix}{ed\+::matrix}}$<$ T, Height, Width $>$\+::equalization (\begin{DoxyParamCaption}\item[{int}]{spread\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Non-\/lineair equalization. 
+
+This equalization function makes use of the non-\/lineair way of equalization with the result of distributing a pixel value according to the frequency of the original pixel value. This function scales the values $<$=0 to 0 with as maximum the spread\+\_\+size value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em spread\+\_\+size} & The equialized values are in a range from 0 and spread\+\_\+size. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classed_1_1matrix_a2adb72ad2c0829cf6efc33d6984308e6}\label{classed_1_1matrix_a2adb72ad2c0829cf6efc33d6984308e6}} 
+\index{ed\+::matrix@{ed\+::matrix}!get\+\_\+intensity\+\_\+image\+\_\+ptr@{get\+\_\+intensity\+\_\+image\+\_\+ptr}}
+\index{get\+\_\+intensity\+\_\+image\+\_\+ptr@{get\+\_\+intensity\+\_\+image\+\_\+ptr}!ed\+::matrix@{ed\+::matrix}}
+\subsubsection{\texorpdfstring{get\+\_\+intensity\+\_\+image\+\_\+ptr()}{get\_intensity\_image\_ptr()}}
+{\footnotesize\ttfamily template$<$class T, int Height = 0, int Width = 0$>$ \\
+Intensity\+Image$\ast$ \mbox{\hyperlink{classed_1_1matrix}{ed\+::matrix}}$<$ T, Height, Width $>$\+::get\+\_\+intensity\+\_\+image\+\_\+ptr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+This function creates and returns an new Intensity\+Image pointer. This function creates a Intensity\+Image pointer from the matrix and returns the pointer afterwards. 
+
+\begin{DoxyReturn}{Returns}
+The Intensity\+Image pointer. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classed_1_1matrix_a958041dd0f380db0f0b60f85b736b020}\label{classed_1_1matrix_a958041dd0f380db0f0b60f85b736b020}} 
+\index{ed\+::matrix@{ed\+::matrix}!operator()@{operator()}}
+\index{operator()@{operator()}!ed\+::matrix@{ed\+::matrix}}
+\subsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$class T, int Height = 0, int Width = 0$>$ \\
+T\& \mbox{\hyperlink{classed_1_1matrix}{ed\+::matrix}}$<$ T, Height, Width $>$\+::operator() (\begin{DoxyParamCaption}\item[{const int}]{y,  }\item[{const int}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Operator for using the 1D array as an 2D array.
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & The height value (y). \\
+\hline
+{\em x} & The width value (x).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The reference to the value of (y, x). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classed_1_1matrix_a6c184e083e3849cb0804915300d68cad}\label{classed_1_1matrix_a6c184e083e3849cb0804915300d68cad}} 
+\index{ed\+::matrix@{ed\+::matrix}!operator()@{operator()}}
+\index{operator()@{operator()}!ed\+::matrix@{ed\+::matrix}}
+\subsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$class T, int Height = 0, int Width = 0$>$ \\
+T \mbox{\hyperlink{classed_1_1matrix}{ed\+::matrix}}$<$ T, Height, Width $>$\+::operator() (\begin{DoxyParamCaption}\item[{const int}]{y,  }\item[{const int}]{x }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Operator for using the 1D array as an 2D array.
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & The height value (y). \\
+\hline
+{\em x} & The width value (x).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value of (y, x). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classed_1_1matrix_aee4710cd7dd60dc960087bc3466d2881}\label{classed_1_1matrix_aee4710cd7dd60dc960087bc3466d2881}} 
+\index{ed\+::matrix@{ed\+::matrix}!operator()@{operator()}}
+\index{operator()@{operator()}!ed\+::matrix@{ed\+::matrix}}
+\subsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$class T, int Height = 0, int Width = 0$>$ \\
+T\& \mbox{\hyperlink{classed_1_1matrix}{ed\+::matrix}}$<$ T, Height, Width $>$\+::operator() (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Operator for using the 1D array with a direct index.
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & The index of the array.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The reference to the value of (n). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classed_1_1matrix_ac3928d0287a81060742db500412e530e}\label{classed_1_1matrix_ac3928d0287a81060742db500412e530e}} 
+\index{ed\+::matrix@{ed\+::matrix}!operator()@{operator()}}
+\index{operator()@{operator()}!ed\+::matrix@{ed\+::matrix}}
+\subsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$class T, int Height = 0, int Width = 0$>$ \\
+T \mbox{\hyperlink{classed_1_1matrix}{ed\+::matrix}}$<$ T, Height, Width $>$\+::operator() (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Operator for using the 1D array with a direct index.
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & The index of the array.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value of (n). 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+edge\+\_\+detection.\+h\end{DoxyCompactItemize}
