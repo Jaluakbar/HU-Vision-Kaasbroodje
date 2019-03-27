@@ -36,7 +36,7 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &i
 	};
 
 	// Creating the gaussian kernel with a sigma
-	const auto gaussian_kernel = gaussian_kernel_creator(0.69);
+	const auto gaussian_kernel = gaussian_kernel_creator(0.890);
 
 	// Canny edge detection kernel.
 	ed::matrix<int, 9,9> edge_kernel({ {
@@ -51,12 +51,6 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &i
 	{0,0,0,1,1,1,0,0,0}
 } });
 
-	ed::matrix<int, 3, 3> edge_kernel_small({{
-		{0,1,0},
-		{1,-4, 1},
-		{0,1,0}
-		}});
-
 	// Create an ed::matrix from the IntensityImage
 	ed::matrix<int> img(image);
 
@@ -69,7 +63,7 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &i
 	//img.equalization(255);
 
 	// Use the Canny edge detection thresholding to complete step 2 and also the last step in the edge detection.
-	tr::basic_threshold<int>(img, 169);
+	tr::basic_threshold<int>(img, 170);
 
 	// convert the matrix to a IntensityImage type which is required.
 	return img.get_intensity_image_ptr();
