@@ -30,7 +30,7 @@ namespace ed{
 		 * \param height The height of the matrix
 		 * \param width The width of the matrix
 		 */
-		matrix(const int height, const int width) :
+		constexpr matrix(const int height, const int width) :
 			width(width),
 			height(height) 
 		{
@@ -171,6 +171,18 @@ namespace ed{
 		}
 
 		/**
+		 * Operator for using the 1D array as an 2D array.
+		 *
+		 * \param y The height value (y).
+		 * \param x The width value (x).
+		 *
+		 * \return The value of (y, x).
+		 */
+		T operator()(const int y, const int x) const{
+			return m[(y*width) + x];
+		}
+
+		/**
 		 * Operator for using the 1D array with a direct index.
 		 * 
 		 * \param n The index of the array.
@@ -178,6 +190,17 @@ namespace ed{
 		 * \return The reference to the value of (n).
 		 */
 		T & operator()(int n) {
+			return m[n];
+		}
+
+		/**
+		 * Operator for using the 1D array with a direct index.
+		 *
+		 * \param n The index of the array.
+		 *
+		 * \return The value of (n).
+		 */
+		T operator()(int n) const{
 			return m[n];
 		}
 
@@ -213,7 +236,7 @@ namespace ed{
 	 * @return A new matrix as result from the convoluted picture with the kernel. 
 	 */
 	template <typename T, int Height, int Width, typename TT = T>
-	matrix<T> convolution(matrix<T> & image, matrix<TT, Height, Width> & kernel) {
+	matrix<T> convolution(matrix<T> & image, const matrix<TT, Height, Width> & kernel) {
 		// find center position of kernel (half of kernel size)
 		unsigned int kernel_width = kernel.width;
 		unsigned int kernel_height = kernel.height;

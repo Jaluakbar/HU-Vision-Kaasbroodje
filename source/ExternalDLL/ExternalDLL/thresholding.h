@@ -15,10 +15,10 @@ namespace tr {
 		 * \param threshold The threshold trigger to split the image
 		 */
 	template <class T>
-	void basic_threshold(ed::matrix<T> &src, const int &threshold) {
+	void basic_threshold(ed::matrix<T> &src, const int &threshold_min=170, const int &threshold_max=2500) {
 		for (int i = 0; i < src.height; i++) {
 			for (int j = 0; j < src.width; j++) {
-				if (src(i, j) <= threshold || src(i, j) > 2500) {
+				if (src(i, j) <= threshold_min || src(i, j) >= threshold_max) {
 					src(i, j) = 255;
 				}
 				else {
