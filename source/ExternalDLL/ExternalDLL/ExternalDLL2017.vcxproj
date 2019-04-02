@@ -93,6 +93,7 @@
     <ClInclude Include="Feature.h" />
     <ClInclude Include="FeatureMap.h" />
     <ClInclude Include="GrayscaleAlgorithm.h" />
+    <ClInclude Include="mainpage.dox" />
     <ClInclude Include="SonnetXVIII.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageFactory.h" />
